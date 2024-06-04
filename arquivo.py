@@ -4,6 +4,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier #modelo de decisão tree
 from sklearn.neighbors import KNeighborsClassifier #modelo de kneighbors classifier
 from sklearn.metrics import classification_report
+import warnings
+warnings.filterwarnings('ignore')
 
 # Questão 2 - leitura dos dados com a biblioteca pandas
 url = "https://raw.githubusercontent.com/marcelovca90-inatel/AG002/main/palmerpenguins.csv"
@@ -28,10 +30,10 @@ print("Resultado das colunas:")
 print(data1.species)
 
 # Questão 5 - separação dos dados em duas partes e dividir os dados em conjuntos de treinamento (80%) e teste (20%)
-X = data.drop('species', axis=1)
-y = data['species']
+X = data1.drop('species', axis=1)
+y = data1['species']
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=9)
 
 """#Resultados com o modelo: **Decision Tree**
 
@@ -71,10 +73,7 @@ species_map_inverse = {0: 'Adelie', 1: 'Chinstrap', 2: 'Gentoo'}
 
 # Inserção de dados
 user_input = []
-user_input.append(float(input("Comprimento do cúlmen (mm): ")))
-user_input.append(float(input("Profundidade do cúlmen (mm): ")))
-user_input.append(float(input("Comprimento da nadadeira (mm): ")))
-user_input.append(float(input("Massa corporal (g): ")))
+
 
 # Condição na opção ilha para que aceite somente as opções (Ilha (Biscoe, Dream, Torgersen)
 while True:
@@ -93,6 +92,11 @@ while True:
         break
     else:
         print("Por favor, insira um sexo válido.")
+
+user_input.append(float(input("Comprimento do cúlmen (mm): ")))
+user_input.append(float(input("Profundidade do cúlmen (mm): ")))
+user_input.append(float(input("Comprimento da nadadeira (mm): ")))
+user_input.append(float(input("Massa corporal (g): ")))
 
 # Previsão da espécie de pinguim com base nos dados inseridos usando a Árvore de Decisão
 dt_prediction = dt_model.predict([user_input])
